@@ -180,6 +180,10 @@ nmap <leader><space> :%s/\s\+$<cr>
 " wipout buffer
 nmap <silent> <leader>b :bw<cr>
 
+" Move between buffers quickly
+noremap <silent> <leader>b& :bprevious<CR>
+noremap <silent> <leader>bé :bnext<CR>
+
 " shortcut to save
 nmap <leader>, :w<cr>
 
@@ -437,7 +441,7 @@ let g:neomake_typescript_tsc_maker = {
         \ '%C%\s%\+%m'
 \ }
 
-autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+" autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 " let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
 " let g:neomake_javascript_enabled_makers = ['eslint']
 
@@ -487,4 +491,5 @@ call ApplyLocalSettings(expand('.'))
  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
  autocmd InsertLeave * match ExtraWhitespace /\s\+$/
  autocmd BufWinLeave * call clearmatches()
+
 " vim:foldmethod=marker:foldlevel=0

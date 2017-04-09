@@ -5,6 +5,7 @@ so ~/.vim/plugins.vim
 
 set backspace=indent,eol,start					" Make backspace behave like every other editor"
 let mapleader = ','								" Default leader is \, but a comma is much better
+set relativenumber 
 set number   									" Activate line numbers
 set noerrorbells visualbell t_vb=               " No damn bells!
 set complete=.,w,b,u 							" Set our desired autocompletion matching.
@@ -16,7 +17,7 @@ let @a= "yiw^[/}^MO$this->^[pa = $^[pa;^[?construct^MOprotected $^[pa;^M^[/const
 "-------------------Visual---------------------"
 colorscheme atom-dark
 set t_CO=256												"Force 256 colors in Terminal Vim
-set guifont=Fira_Code:h15
+set guifont=Fira_Code:h17
 set linespace=15											"Macvim-specific line-height
 
 set guioptions-=e											"Disable gui tabs
@@ -34,14 +35,21 @@ hi foldcolumn guibg=bg
 "Get rid of ugly split border
 hi vertsplit guifg=bg guibg=bg
 
-
+"-------------------GIT------------------------"
+":highlight DiffAdd ctermfg=253 ctermbg=237 guifg=#dadada guibg=#3a3a3a
+hi! DiffAdd      guibg=#003300
+hi! DiffChange   guibg=#003300
+hi! DiffDelete   guifg=#330000 guibg=#330000
+hi! DiffText     guibg=#990000    
 
 "-------------------Search---------------------"
 set hlsearch
 set incsearch
 
 
-
+"------------------ Fuzy Search-----------------"
+set path+=**
+set wildmenu 
 
 
 "-------------------Split Management-----------"
@@ -156,6 +164,10 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+"/
+"/ Ctags for namespacing
+"/
+set tags+=tags,tags.vendors
 
 "-------------------Laravel specific-----------"
 nmap <Leader>lm :!php artisan make:

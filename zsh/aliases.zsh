@@ -77,3 +77,7 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 
 alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
 alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary"
+
+# Go to must used projects
+alias vs="cd /Users/kenandries/virtualSky"
+alias digipolis="cd /Users/kenandries/work/digipolis"

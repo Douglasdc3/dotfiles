@@ -53,7 +53,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow jump httpie mvn svn vagrant vim)
+plugins=(git git-flow jump httpie mvn svn vagrant vim docker)
 
 # User configuration
 
@@ -69,6 +69,7 @@ export PATH=$JAVA_HOME:$GLASSFISH:$MANPATH:$M2_HOME/bin:$COMPOSER_BIN:$COMPOSER_
 export JET_HOME=/opt/jet11.0-pro-amd64
 export PATH=$JET_HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
+export PATH=vendor/bin:$PATH
 
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin  ]]; then
@@ -127,7 +128,7 @@ if [ "$BACKGROUND" = "light"  ]; then
     export THEME="base16-google-light"
     BACKGROUND=""
 else
-    export THEME="base16-atelier-cave"
+    export THEME="base16-dracula.dark"
 fi
 # Base16 Shell
 BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
@@ -135,3 +136,4 @@ BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
 source $BASE16_SHELL
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

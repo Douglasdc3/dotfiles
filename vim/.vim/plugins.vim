@@ -21,6 +21,9 @@ Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'tobyS/pdv'
 Plugin 'tobyS/vmustache'
 Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-fugitive'
+Plugin 'valloric/youcompleteme'
+Plugin 'craigemery/vim-autotag'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
