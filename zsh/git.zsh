@@ -1,6 +1,6 @@
-alias gcd=git checkout development
-alias gcm=git checkout master
-
+alias gcd="git checkout development"
+alias gcm="git checkout master"
+alias gpb="git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
 
 composer-bump()
 {
