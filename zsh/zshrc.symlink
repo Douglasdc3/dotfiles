@@ -124,16 +124,17 @@ if [[ -a ~/.localrc  ]]; then
     source ~/.localrc
 fi
 
-if [ "$BACKGROUND" = "light"  ]; then
-    export THEME="base16-google-light"
-    BACKGROUND=""
-else
-    export THEME="base16-dracula.dark"
-fi
+# Theme based on BASE16
+#if [ "$BACKGROUND" = "light"  ]; then
+#    export THEME="base16-google-light"
+#    BACKGROUND=""
+#else
+#    export THEME="base16-dracula.dark"
+# fi
 # Base16 Shell
-BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
+# BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
 # [[ -s $BASE16_SHELL  ]] && source $BASE16_SHELL
-source $BASE16_SHELL
+# source $BASE16_SHELL
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
