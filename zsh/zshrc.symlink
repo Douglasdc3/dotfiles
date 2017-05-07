@@ -7,7 +7,6 @@ export REPORTTIME=10
 
 [[ -e ~/.terminfo  ]] && export TERMINFO_DIRS=~/.terminfo:/usr/share/terminfo
 
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -70,6 +69,7 @@ export JET_HOME=/opt/jet11.0-pro-amd64
 export PATH=$JET_HOME/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=vendor/bin:$PATH
+export PATH=node_modules/.bin:$PATH
 
 # add /usr/local/sbin
 if [[ -d /usr/local/sbin  ]]; then
