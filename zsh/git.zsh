@@ -1,6 +1,15 @@
 alias gcd="git checkout development"
 alias gcm="git checkout master"
-alias gpb="git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
+
+gpb()
+{
+    git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+}
+
+git-own()
+{
+    git ls-files | while read f; do git blame --line-porcelain $f | grep '^author '; done | sort -f | uniq -ic | sort -n
+}
 
 composer-bump()
 {
