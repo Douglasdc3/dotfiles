@@ -10,7 +10,7 @@ set number   									" Activate line numbers
 set noerrorbells visualbell t_vb=               " No damn bells!
 set complete=.,w,b,u 							" Set our desired autocompletion matching.
 set autowriteall                                " Automatically write the file when switching buffers.
-set autochdir	                                " Change working directory to open buffer
+"set autochdir	                                " Change working directory to open buffer
 
 let @a= "yiw^[/}^MO$this->^[pa = $^[pa;^[?construct^MOprotected $^[pa;^M^[/construct^M/^R\", <80>kb<80>kb^M, "
 
