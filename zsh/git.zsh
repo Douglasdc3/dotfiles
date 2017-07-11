@@ -11,6 +11,12 @@ git-own()
     git ls-files | while read f; do git blame --line-porcelain $f | grep '^author '; done | sort -f | uniq -ic | sort -n
 }
 
+nah()
+{
+    git reset --hard;
+    git clean -df;
+}
+
 composer-bump()
 {
     echo "Press any key to continue, Vim will start and auto bump the patch version. Press space :q to quit vim in orde to commit & push your changes..."
