@@ -80,9 +80,27 @@ alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\
 
 # PHP/Laravel alias
 alias artisan="php artisan"
+alias art="php artisan"
 alias p="phpunit"
 alias pf="phpunit --filter "
+alias artisan-reset="rm database/database.sqlite && touch database/database.sqlite && artisan migrate --seed"
+alias mix="npm run dev"
+alias mw="npm run watch"
+
+# Docker
+alias dcu="docker-compose up -d"
+alias dcs="docker-compose stop"
+
+# Other
+alias ctags="`brew --prefix`/bin/ctags"
+
+# Aviation
+function metar() {
+   curl -s https://aviationweather.gov/adds/dataserver_current/httpparam\?dataSource\=metars\&requestType\=retrieve\&format\=xml\&stationString\=$1\&hoursBeforeNow\=2\&mostRecent\=true | grep raw_text | awk -F">" '{print $2}' | awk -F"<" '{print $1}'
+}
+
+function taf() {
+   curl -s https://aviationweather.gov/adds/dataserver_current/httpparam\?dataSource\=tafs\&requestType\=retrieve\&format\=xml\&stationString\=$1\&hoursBeforeNow\=2\&mostRecent\=true | grep raw_text | awk -F">" '{print $2}' | awk -F"<" '{print $1}'
+}
 
 # Go to most used projects
-alias vs="cd /Users/kenandries/virtualSky"
-alias digipolis="cd /Users/kenandries/work/digipolis"

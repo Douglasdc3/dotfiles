@@ -1,5 +1,7 @@
 alias gcd="git checkout development"
 alias gcm="git checkout master"
+alias gll="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+alias gs="git status"
 
 gpb()
 {
@@ -15,6 +17,13 @@ nah()
 {
     git reset --hard;
     git clean -df;
+}
+
+gh-sync()
+{
+    git fetch upstream;
+    git reset --hard upstream/master;
+    git push --force;
 }
 
 composer-bump()

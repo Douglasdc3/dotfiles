@@ -18,7 +18,7 @@ let @a= "yiw^[/}^MO$this->^[pa = $^[pa;^[?construct^MOprotected $^[pa;^M^[/const
 colorscheme atom-dark
 set t_CO=256												"Force 256 colors in Terminal Vim
 set guifont=Fira_Code:h17
-set linespace=15											"Macvim-specific line-height
+set linespace=22											"Macvim-specific line-height
 
 set guioptions-=e											"Disable gui tabs
 
@@ -185,7 +185,7 @@ augroup END
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
-
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 
 " Notes and Tips
 "  - Press 'zz' to center in the middle of the screen

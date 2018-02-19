@@ -11,8 +11,7 @@ export REPORTTIME=10
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="aviationcode"
-
+ZSH_THEME="../../.dotfiles/zsh/cobalt2"
 
 # Uncomment the following line to change how often to auto-update (in days).
 export UPDATE_ZSH_DAYS=30
@@ -24,10 +23,10 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow jump httpie mvn svn vagrant vim docker)
-
+plugins=(git git-flow jump httpie mvn svn vagrant vim docker z tig web-search)
 
 # User configuration
+export XDEBUG_CONFIG="idekey=VSCODE"
 export M2_HOME=/usr/local/maven
 export MANPATH=$HOME/bin:/usr/local/bin
 export GLASSFISH=/Applications/glassfish4/bin
@@ -67,9 +66,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias homestead="php ~/homestead/homestead"
-alias ctags="`brew --prefix`/bin/ctags"
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
