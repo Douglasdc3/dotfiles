@@ -53,19 +53,44 @@ prompt_context() {
   fi
 }
 
+# get the status of the current branch and it's remote
+# If there are changes upstream, display a ⇣
+# If there are changes that have been committed but not yet pushed, display a ⇡
+git_arrows() {
+    # do nothing if there is no upstream configured
+    command git rev-parse --abbrev-ref @'{u}' &>/dev/null || return
+
+    local arrows=""
+    local status
+    arrow_status="$(command git rev-list --left-right --count HEAD...@'{u}' 2>/dev/null)"
+
+    # do nothing if the command failed
+    (( !$? )) || return
+
+    # split on tabs
+    arrow_status=(${(ps:\t:)arrow_status})
+    local left=${arrow_status[1]} right=${arrow_status[2]}
+
+    (( ${right:-0} > 0 )) && arrows+="⇣"
+    (( ${left:-0} > 0 )) && arrows+="⇡"
+
+    echo $arrows
+}
+
 # Git: branch/detached head, dirty status
 prompt_git() {
   local ref dirty
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     ZSH_THEME_GIT_PROMPT_DIRTY='±'
     dirty=$(parse_git_dirty)
+    arrows=$(git_arrows)
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git show-ref --head -s --abbrev |head -n1 2> /dev/null)"
     if [[ -n $dirty ]]; then
       prompt_segment yellow black
     else
       prompt_segment green black
     fi
-    echo -n "${ref/refs\/heads\// }$dirty"
+    echo -n "${ref/refs\/heads\// }$dirty$arrows"
   fi
 }
 
