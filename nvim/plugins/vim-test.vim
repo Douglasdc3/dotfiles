@@ -2,7 +2,7 @@ Plug 'vim-test/vim-test'
 
 "let test#strategy = "neovim"
 "let g:test#transformation = 'zsh'
-let test#php#phpunit#executable = 'deliver vendor/bin/phpunit'
+let test#php#phpunit#executable = 'vendor/bin/phpunit'
 
 nmap <leader>tn :TestNearest<CR>
 nmap <leader>tf :TestFile<CR>
