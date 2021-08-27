@@ -15,7 +15,7 @@ touch $HOME/.hushlogin
 
 echo "Install brew tools"
 # Development tools
-brew install zsh-autosuggestions
+brew install zsh-autosuggestions zsh-syntax-highlighting
 brew install fzf
 brew install nvim
 brew install tmux tmuxinator
