@@ -7,7 +7,6 @@ plugins=(
   osx
   jump
   httpie
-  vim
   docker
   z
   laravel5
