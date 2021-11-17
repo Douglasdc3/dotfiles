@@ -11,7 +11,7 @@ set relativenumber
 set number
 set termguicolors
 set undofile
-set spell
+"set spell
 set title
 set inccommand=nosplit
 set ignorecase
