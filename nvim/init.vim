@@ -140,6 +140,7 @@ source ~/.config/nvim/plugins/smooth-scroll.vim
 source ~/.config/nvim/plugins/arduino.vim
 source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/textobj-xmlattr.vim
+source ~/.config/nvim/plugins/auto-save.vim
 
 call plug#end()
 
