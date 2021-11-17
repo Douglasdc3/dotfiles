@@ -4,7 +4,7 @@ ZSH_THEME="robbyrussell"
 
 plugins=(
   git
-  osx
+  macos
   jump
   httpie
   docker
