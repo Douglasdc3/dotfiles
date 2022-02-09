@@ -89,6 +89,9 @@ composer global require "squizlabs/php_codesniffer:*"
 composer global require "phpmd/phpmd:*"
 composer global require "friendsofphp/php-cs-fixer:*"
 composer global require "infection/infection:*"
+composer global require "beyondcode/expose"
+
+echo "Do not forget to activate expose first"
 
 echo "Setup valet (may require password)"
 valet trust
