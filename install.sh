@@ -61,6 +61,7 @@ brew install --cask robo-3t sequel-pro
 # Utils
 brew install --cask caffeine flux color-oracle gifox spectacle
 brew install --cask alfred
+brew install --cask drawio
 brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
 brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-nerd-font
 
