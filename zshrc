@@ -2,19 +2,6 @@ export DOTFILES=$HOME/.dotfiles
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-plugins=(
-  git
-  macos
-  jump
-  httpie
-  docker
-  z
-  laravel5
-  composer
-  tmux
-  tmuxinator
-)
-
 source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
