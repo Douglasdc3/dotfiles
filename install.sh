@@ -18,7 +18,7 @@ echo "Install brew tools"
 brew install zsh-autosuggestions zsh-syntax-highlighting
 brew install fzf
 brew install nvim
-brew install tmux tmuxinator
+brew install tmux tmuxinator urlview
 brew install sqlite
 brew install php
 brew install node

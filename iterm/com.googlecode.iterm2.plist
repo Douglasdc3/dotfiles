@@ -1032,13 +1032,6 @@
 			<key>Text</key>
 			<string>EC3815E8-1005-46B1-85A5-704B57485824</string>
 		</dict>
-		<key>0x64-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>29</integer>
-			<key>Text</key>
-			<string>EC3815E8-1005-46B1-85A5-704B57485824</string>
-		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
