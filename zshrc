@@ -18,6 +18,7 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 for config ($DOTFILES/zsh/**/*.zsh) source $config
 
 # Export PATH variables
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="vendor/bin:$PATH"
 export PATH="node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"

@@ -5,10 +5,14 @@ ln -F -s $PWD/zshrc $HOME/.zshrc
 ln -F -s $PWD/ctags $HOME/.ctags
 ln -F -s $PWD/gitignore_global $HOME/.gitignore_global
 ln -F -s $PWD/phpactor.yml $HOME/.phpactor.yml
+ln -F -s $PWD/kitty $HOME/.config/kitty
 ln -F -s $PWD/tmux.conf $HOME/.tmux.conf
 ln -F -s $PWD/tmux_darwin.conf $HOME/.tmux_darwin.conf
 ln -F -s $PWD/tmux/ $HOME/.tmux
 ln -F -s $PWD/nvim/ $HOME/.config/nvim
+
+mkdir -p $HOME/.local/bin
+ln -F -s $PWD/scripts/t $HOME/.local/bin/t
 
 echo "Hush login screen when opening new terminal"
 touch $HOME/.hushlogin
@@ -64,6 +68,8 @@ brew install --cask alfred
 brew install --cask drawio
 brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
 brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-nerd-font
+brew install --cask homebrew/cask-fonts/font-fira-code-nerd-font
+brew install --cask homebrew/cask-fonts/font-jetbrains-mono-nerd-font
 
 # Browsers 
 brew install --cask firefox google-chrome opera
