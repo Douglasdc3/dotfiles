@@ -19,6 +19,7 @@ _ide_helper.php
 
 # PhpStorm
 .idea
+.idea/
 # vs code
 .vscode
 # Sublime Text
