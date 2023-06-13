@@ -5,6 +5,7 @@ ln -F -s $PWD/zshrc $HOME/.zshrc
 ln -F -s $PWD/ctags $HOME/.ctags
 ln -F -s $PWD/gitignore_global $HOME/.gitignore_global
 ln -F -s $PWD/phpactor.yml $HOME/.phpactor.yml
+ln -s $PWD/phpactor $HOME/.config/phpactor
 ln -F -s $PWD/kitty $HOME/.config/kitty
 ln -F -s $PWD/tmux.conf $HOME/.tmux.conf
 ln -F -s $PWD/tmux_darwin.conf $HOME/.tmux_darwin.conf
@@ -22,6 +23,7 @@ echo "Install brew tools"
 brew install zsh-autosuggestions zsh-syntax-highlighting
 brew install fzf
 brew install nvim
+brew install lua-language-server luacheck
 brew install tmux tmuxinator urlview
 brew install sqlite
 brew install php
