@@ -14,6 +14,7 @@ ln -F -s $PWD/nvim/ $HOME/.config/nvim
 
 mkdir -p $HOME/.local/bin
 ln -F -s $PWD/scripts/t $HOME/.local/bin/t
+ln -F -s $PWD/scripts/deliver $HOME/.local/bin/deliver
 
 echo "Hush login screen when opening new terminal"
 touch $HOME/.hushlogin
