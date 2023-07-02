@@ -4,7 +4,6 @@ echo "Symlink .dotfiles dot files into $HOME"
 ln -F -s $PWD/zshrc $HOME/.zshrc
 ln -F -s $PWD/ctags $HOME/.ctags
 ln -F -s $PWD/gitignore_global $HOME/.gitignore_global
-ln -F -s $PWD/phpactor.yml $HOME/.phpactor.yml
 ln -s $PWD/phpactor $HOME/.config/phpactor
 ln -F -s $PWD/kitty $HOME/.config/kitty
 ln -F -s $PWD/tmux.conf $HOME/.tmux.conf
