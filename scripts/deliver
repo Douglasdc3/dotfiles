@@ -11,7 +11,7 @@ fi
 DOCKER_COMPOSE_SERVICE_NAME=`$DOCKER_COMPOSE ps --services 2>/dev/null | grep '^app\|php\|api\|workspace\|laravel\.test$' | head -n1`
 
 if [ "$DOCKER_COMPOSE_SERVICE_NAME" == '' ]; then
-    DOCKER_COMPOSE_SERVICE_NAME=`$DOCKER_COMPOSE ps --services 2>/dev/null | grep -v '^event\|web-.*' | head -n1`
+    DOCKER_COMPOSE_SERVICE_NAME=`$DOCKER_COMPOSE ps --services 2>/dev/null | grep -v '^event\|web-.*\|elastic*\|kibana' | head -n1`
 fi
 
 if [ "$DOCKER_COMPOSE_SERVICE_NAME" != '' ]; then
