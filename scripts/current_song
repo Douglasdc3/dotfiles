@@ -1,0 +1,16 @@
+#!/bin/bash
+
+isRunning=$(ps aux | grep -v grep | grep -ci Music)
+
+if [ $isRunning -gt 0 ]
+then
+  name=$(osascript -e 'tell application "Music" to get name of current track')
+  name=${name:0:50}
+  artist=${artist:0:50}
+  artist=$(osascript -e 'tell application "Music" to get artist of current track')
+
+  echo "🔈 $name - $artist"
+else
+  echo ""
+fi
+
