@@ -27,3 +27,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+bindkey -e
+bindkey '^[[1;3C' forward-word
+bindkey '^[[1;3D' backward-word
+
