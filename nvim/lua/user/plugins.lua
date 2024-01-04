@@ -1,355 +1,137 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- Bootstrap Lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
+require("lazy").setup({
+  -- Color scheme
+  { import = 'user.plugins.tokyonight' },
 
-require('packer').reset()
-require('packer').init({
-  compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
-  --display = {
-  --  open_fn = function()
-  --    return require('packer.util').float({ border = 'solid' })
-  --  end,
-  --},
-})
+  -- Commenting support.
+  { import = 'user.plugins.vim-commentary' },
 
-local use = require('packer').use
+  -- Add, change, and delete surrounding text.
+  { 'tpope/vim-surround' },
 
-use('wbthomason/packer.nvim')
+  -- Useful commands like :Rename and :SudoWrite.
+  { 'tpope/vim-eunuch' },
 
--- Commenting support
-use('tpope/vim-commentary')
+  -- Pairs of handy bracket mappings, like [b and ]b.
+  { 'tpope/vim-unimpaired', event = 'VeryLazy' },
 
--- add, change, and delete surrounding text
-use('tpope/vim-surround')
+  -- Indent autodetection with editorconfig support.
+  { 'tpope/vim-sleuth' },
 
--- Useful command like :Rename :SudoWrite
-use('tpope/vim-eunuch')
+  -- Allow plugins to enable repeating of commands.
+  { 'tpope/vim-repeat' },
 
---Useful command like :Rename :SudoWriteirs of handy bracket mappings like [b and ]b 
-use('tpope/vim-unimpaired')
+  -- Navigate seamlessly between Vim windows and Tmux panes.
+  { 'christoomey/vim-tmux-navigator' },
 
--- Indent autodetection with editorconfig
-use('tpope/vim-sleuth')
+  -- Jump to the last location when opening a file.
+  { 'farmergreg/vim-lastplace' },
 
--- Allow plugins to  enable repeating commands
-use('tpope/vim-repeat')
+  -- Enable * searching with visually selected text.
+  { 'nelstrom/vim-visual-star-search' },
 
--- Navigate seamlessly between Vim Windows and Tmux panes
-use('christoomey/vim-tmux-navigator')
+  -- Automatically create parent dirs when saving.
+  { 'jessarcher/vim-heritage' },
 
--- Jump to the last location when opening a file
-use('farmergreg/vim-lastplace')
+  -- Text objects for HTML attributes.
+  { 'whatyouhide/vim-textobj-xmlattr', dependencies = 'kana/vim-textobj-user'  },
 
--- Enable * searching with visually selected text
-use('nelstrom/vim-visual-star-search')
+  -- Automatically set the working directory to the project root.
+  { import = 'user.plugins.vim-rooter' },
 
--- Automatically create parent dirs when saving
-use('jessarcher/vim-heritage')
+  -- Automatically add closing brackets, quotes, etc.
+  { 'windwp/nvim-autopairs', config = true },
 
-use({
-  'tpope/vim-projectionist',
-  requires = 'tpope/vim-dispatch',
-  config = function()
-    require('user.plugins.projectionist')
-  end,
-})
+  -- Add smooth scrolling to avoid jarring jumps
+  { 'karb94/neoscroll.nvim', config = true },
 
-use({
-  'jessarcher/onedark.nvim',
-  config = function()
-    vim.cmd('colorscheme onedark')
+  -- All closing buffers without closing the split window.
+  { import = 'user.plugins.bufdelete' },
 
-    -- Hide the characters in FloatBorder
-    vim.api.nvim_set_hl(0, 'FloatBorder', {
-      fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-      bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
-    })
+  -- Split arrays and methods onto multiple lines, or join them back up.
+  { import = 'user.plugins.treesj' },
 
-    -- Make the StatusLineNonText background the same as StatusLine
-    vim.api.nvim_set_hl(0, 'StatusLineNonText', {
-      fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
-      bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
-    })
+  -- Automatically fix indentation when pasting code.
+  { import = 'user.plugins.vim-pasta' },
 
-    -- Hide the characters in CursorLineBg
-    vim.api.nvim_set_hl(0, 'CursorLineBg', {
-      fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
-      bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
-    })
+  -- Fuzzy finder
+  { import = 'user.plugins.telescope' },
 
-    vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
-    vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = '#2F313C' })
-  end,
-})
+  -- File tree sidebar
+  { import = 'user.plugins.neo-tree' },
 
-use({
-  'tommcdo/vim-lion',
-  config = function()
-    require('user.plugins.lion')
-  end,
-})
+  -- A Status line.
+  { import = 'user.plugins.lualine' },
 
-use({
-  'whatyouhide/vim-textobj-xmlattr',
-  requires = 'kana/vim-textobj-user',
-})
+  -- Display buffers as tabs.
+  { import = 'user.plugins.bufferline' },
 
-use({
-  'sickill/vim-pasta',
-  config = function()
-    require('user.plugins.pasta')
-  end,
-})
+  -- Display indentation lines.
+  { import = 'user.plugins.indent-blankline' },
 
-use({
-  'famiu/bufdelete.nvim',
-  config = function()
-    vim.keymap.set('n', '<Leader>q', ':Bdelete<CR>')
-  end,
-})
+  -- Add a dashboard.
+  { import = 'user.plugins.dashboard-nvim' },
 
-use({
-  'lukas-reineke/indent-blankline.nvim',
-  config = function()
-    require('user.plugins.indent-blankline')
-  end,
-})
+  -- Git integration.
+  { import = 'user.plugins.gitsigns' },
 
-use({
-  'AndrewRadev/splitjoin.vim',
-  config = function()
-    require('user.plugins.splitjoin')
-  end,
-})
+  -- Git commands.
+  { 'tpope/vim-fugitive', dependencies = 'tpope/vim-rhubarb' },
 
-use({
-  'windwp/nvim-autopairs',
-  config = function()
-    require('nvim-autopairs').setup()
-  end,
-})
+  --- Floating terminal.
+  { import = 'user.plugins.floaterm' },
 
-use({
-  'akinsho/bufferline.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-  after = 'onedark.nvim',
-  config = function()
-    require('user.plugins.bufferline')
-  end,
-})
+  -- Improved syntax highlighting
+  { import = 'user.plugins.treesitter' },
 
-use({
-  'nvim-lualine/lualine.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('user.plugins.lualine')
-  end,
-})
+  -- Language Server Protocol.
+  { import = 'user.plugins.lspconfig' },
 
-use({
-  'kyazdani42/nvim-tree.lua',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('user.plugins.nvim-tree')
-  end,
-})
+  -- Completion
+  { import = 'user.plugins.cmp' },
 
-use({
-  'karb94/neoscroll.nvim',
-  config = function()
-    require('user.plugins.neoscroll')
-  end,
-})
+  -- PHP Refactoring Tools
+  { import = 'user.plugins.phpactor' },
 
-use({
-  'vim-test/vim-test',
-  config = function()
-    require('user.plugins.vim-test')
-  end,
-})
+  -- Project Configuration.
+  { import = 'user.plugins.projectionist' },
 
-use({
-  'voldikss/vim-floaterm',
-  config = function()
-    require('user.plugins.floaterm')
-  end,
-})
+  -- Testing helper
+  { import = 'user.plugins.vim-test' },
 
-use({
-  'nvim-telescope/telescope.nvim',
-  requires = {
-    { 'nvim-lua/plenary.nvim' },
-    { 'kyazdani42/nvim-web-devicons' },
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-    { 'nvim-telescope/telescope-live-grep-args.nvim' },
+  -- Colorize Hex Codes
+  { import = 'user.plugins.colorizer' },
+
+  -- Show file and LSP context in a bar at the top of the screen.
+  { import = 'user.plugins.barbecue' },
+
+  -- Virtual scrollbar
+  { import = 'user.plugins.nvim-scrollbar' },
+
+  -- Highlight occurrences of the word under the cursor.
+  { import = 'user.plugins.illuminate' },
+}, {
+  checker = {
+    enabled = true,
+    notify = false,
   },
-  config = function()
-    require('user.plugins.telescope')
-  end,
-})
-
-use({
-  'nvim-treesitter/nvim-treesitter',
-  run = ':TSUpdate',
-  requires = {
-    'nvim-treesitter/playground',
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    'JoosepAlviste/nvim-ts-context-commentstring',
+  change_detection = {
+    notify = false,
   },
-  config = function()
-    require('user.plugins.treesitter')
-  end,
-})
-
-use({
-  'tpope/vim-fugitive',
-  requires = 'tpope/vim-rhubarb',
-  cmd = 'G',
-})
-
-use({
-  'lewis6991/gitsigns.nvim',
-  requires = 'nvim-lua/plenary.nvim',
-  config = function()
-    require('gitsigns').setup({
-      sign_priority = 20,
-      on_attach = function(bufnr)
-        vim.keymap.set('n', ']h', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, buffer = bufnr })
-        vim.keymap.set('n', '[h', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, buffer = bufnr })
-      end,
-    })
-  end,
-})
-
-use({
-  'neovim/nvim-lspconfig',
-  requires = {
-    'b0o/schemastore.nvim',
-    'folke/lsp-colors.nvim',
+  install = {
+    colorscheme = { "tokyonight", "habamax" },
   },
-  config = function()
-    require('user.plugins.lspconfig')
-  end,
 })
-
-use({
-  'weilbith/nvim-code-action-menu',
-  cmd = 'CodeActionMenu',
-})
-
-use({
-  'jose-elias-alvarez/null-ls.nvim',
-  config = function()
-    require('user.plugins.null-ls')
-  end,
-})
-
-use({
-  'L3MON4D3/LuaSnip',
-  config = function()
-    require('user.plugins.luasnip')
-  end,
-})
-
-use({
-  'hrsh7th/nvim-cmp',
-  requires = {
-    'L3MON4D3/LuaSnip',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-nvim-lua',
-    'jessarcher/cmp-path',
-    'onsails/lspkind-nvim',
-    'saadparwaiz1/cmp_luasnip',
-  },
-  config = function()
-    require('user.plugins.cmp')
-  end,
-})
-
-use({
-  'phpactor/phpactor',
-  -- branch = 'master',
-  ft = 'php',
-  run = 'composer install --no-dev -o',
-  config = function()
-    require('user.plugins.phpactor')
-  end,
-})
-
--- Experimental
-
-use({
-  'luukvbaal/stabilize.nvim',
-  config = function()
-    require('stabilize').setup()
-  end,
-})
-
-use({
-  'glepnir/dashboard-nvim',
-  config = function()
-    require('user.plugins.dashboard')
-  end,
-})
-
-use({
-  'danymat/neogen',
-  config = function()
-    require('neogen').setup({})
-  end,
-  requires = 'nvim-treesitter/nvim-treesitter',
-})
-
-use({
-  'sheerun/vim-polyglot',
-})
-
--- Rename in a popup window
-use({
-  'hood/popui.nvim',
-  requires = 'RishabhRD/popfix',
-  config = function()
-    vim.ui.select = require('popui.ui-overrider')
-    vim.ui.input = require('popui.input-overrider')
-  end,
-})
-
-use({
-  'folke/trouble.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('trouble').setup()
-  end,
-})
-
-use({
-  'antoinemadec/FixCursorHold.nvim',
-  config = function()
-    vim.g.cursorhold_updatetime = 100
-  end,
-})
-
--- Automatically install plugins on first run
-if packer_bootstrap then
-  require('packer').sync()
-end
-
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile>
-  augroup end
-]])
-

@@ -1,7 +1,9 @@
-vim.cmd([[
-  augroup PhpactorMappings
-    au!
-    au FileType php nmap <buffer> <Leader>pm :PhpactorContextMenu<CR>
-    au FileType php nmap <buffer> <Leader>pn :PhpactorClassNew<CR>
-  augroup END
-]])
+return {
+  'phpactor/phpactor',
+  build = 'composer install --no-dev --optimize-autoloader',
+  ft = 'php',
+  keys = {
+    { '<Leader>pm', ':PhpactorContextMenu<CR>' },
+    { '<Leader>pn', ':PhpactorClassNew<CR>' },
+  }
+}
