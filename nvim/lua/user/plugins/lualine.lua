@@ -1,3 +1,5 @@
+-- Status line
+
 return {
   'nvim-lualine/lualine.nvim',
   lazy = false,
@@ -10,13 +12,7 @@ return {
       section_separators = '',
       component_separators = '',
       globalstatus = true,
-      theme = {
-        normal = {
-          a = 'StatusLine',
-          b = 'StatusLine',
-          c = 'StatusLine',
-        },
-      },
+      theme = 'Dracula',
     },
     sections = {
       lualine_a = {

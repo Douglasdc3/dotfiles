@@ -1,3 +1,5 @@
+-- Language Server Protocol
+
 return {
   'neovim/nvim-lspconfig',
   event = 'VeryLazy',
@@ -31,9 +33,6 @@ return {
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-        -- if client.server_capabilities.inlayHintProvider then
-        --   vim.lsp.buf.inlay_hint(bufnr, true)
-        -- end
       end,
       capabilities = capabilities
     })
@@ -70,14 +69,29 @@ return {
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-        -- if client.server_capabilities.inlayHintProvider then
-        --   vim.lsp.buf.inlay_hint(bufnr, true)
-        -- end
       end,
       capabilities = capabilities,
-      -- Enable "Take Over Mode" where volar will provide all JS/TS LSP services
-      -- This drastically improves the responsiveness of diagnostic updates on change
-      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    })
+
+    require('lspconfig').tsserver.setup({
+      init_options = {
+        plugins = {
+          {
+            name = "@vue/typescript-plugin",
+            location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+            languages = {"javascript", "typescript", "vue"},
+          },
+        },
+      },
+      filetypes = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+        "vue",
+      },
     })
 
     -- Tailwind CSS
@@ -93,9 +107,26 @@ return {
       },
     })
 
+    -- Lua
+    require('lspconfig').lua_ls.setup({
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT' },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              '${3rd}/luv/library',
+              unpack(vim.api.nvim_get_runtime_file('', true)),
+            },
+          }
+        }
+      }
+    })
+
     -- null-ls
     local null_ls = require('null-ls')
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
     null_ls.setup({
       temp_dir = '/tmp',
       sources = {
@@ -140,8 +171,6 @@ return {
 
     -- Keymaps
     vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
-    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
     vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
     vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
     vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
@@ -154,12 +183,12 @@ return {
     vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({ timeout_ms = 5000 }) end, {})
 
     -- Diagnostic configuration
-    vim.diagnostic.config({
-      virtual_text = false,
-      float = {
-        source = true,
-      }
-    })
+    --vim.diagnostic.config({
+      --virtual_text = false,
+      --float = {
+        --source = true,
+      --}
+    --})
 
     -- Sign configuration
     vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
@@ -168,3 +197,4 @@ return {
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
   end,
 }
+

@@ -1,3 +1,5 @@
+-- File tree sidebar
+
 return {
   'nvim-neo-tree/neo-tree.nvim',
   cmd = 'Neotree',
@@ -44,7 +46,7 @@ return {
     source_selector = {
       winbar = true,
       statusline = false,
-      separator = { left = "", right= "" },
+      separator = { left = "", right= "" },
       show_separator_on_edge = true,
       highlight_tab = "SidebarTabInactive",
       highlight_tab_active = "SidebarTabActive",

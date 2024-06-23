@@ -1,3 +1,5 @@
+-- PHP Refactoring Tools
+
 return {
   'phpactor/phpactor',
   build = 'composer install --no-dev --optimize-autoloader',
@@ -7,3 +9,4 @@ return {
     { '<Leader>pn', ':PhpactorClassNew<CR>' },
   }
 }
+

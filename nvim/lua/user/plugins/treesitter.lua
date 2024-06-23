@@ -1,3 +1,5 @@
+-- Syntax highlighting
+
 return {
   'nvim-treesitter/nvim-treesitter',
   event = 'VeryLazy',
@@ -6,16 +8,6 @@ return {
   end,
   dependencies = {
     { 'nvim-treesitter/playground', cmd = "TSPlaygroundToggle" },
-    {
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      opts = {
-        custom_calculation = function (node, language_tree)
-          if vim.bo.filetype == 'blade' and language_tree._lang ~= 'javascript' then
-            return '{{-- %s --}}'
-          end
-        end,
-      },
-    },
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   main = 'nvim-treesitter.configs',
@@ -51,7 +43,6 @@ return {
       'rust',
       'sql',
       'svelte',
-      'typescript',
       'vim',
       'vue',
       'xml',
@@ -64,6 +55,9 @@ return {
     indent = {
       enable = true,
       disable = { "yaml" }
+    },
+    context_commentstring = {
+      enable = true,
     },
     rainbow = {
       enable = true,

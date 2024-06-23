@@ -2,11 +2,15 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Quickly clear search highlighting.
-vim.keymap.set('n', '<leader>k', ':nohlsearch<CR>')
+-- Clear search highlighting.
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Close all open buffers.
 vim.keymap.set('n', '<leader>Q', ':bufdo bdelete<CR>')
+
+-- Diagnostics.
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [d]iagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [d]iagnostic' })
 
 -- Allow gf to open non-existent files.
 vim.keymap.set('', 'gf', ':edit <cfile><CR>')
@@ -27,6 +31,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 -- Paste replace visual selection without copying it.
 vim.keymap.set('v', 'p', '"_dP')
 
+-- Reselect pasted text
+vim.keymap.set('n', 'p', 'p`[v`]')
+
 -- Easy insertion of a trailing ; or , from insert mode.
 vim.keymap.set('i', ';;', '<Esc>A;<Esc>')
 vim.keymap.set('i', ',,', '<Esc>A,<Esc>')
@@ -42,11 +49,3 @@ vim.keymap.set('n', '<C-Up>', ':resize +2<CR>')
 vim.keymap.set('n', '<C-Down>', ':resize -2<CR>')
 vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>')
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>')
-
--- Move text up and down
--- vim.keymap.set('i', '<A-j>', '<Esc>:move .+1<CR>==gi')
--- vim.keymap.set('i', '<A-k>', '<Esc>:move .-2<CR>==gi')
--- vim.keymap.set('n', '<A-j>', ':move .+1<CR>==')
--- vim.keymap.set('n', '<A-k>', ':move .-2<CR>==')
--- vim.keymap.set('v', '<A-j>', ":move '>+1<CR>gv=gv")
--- vim.keymap.set('v', '<A-k>', ":move '<-2<CR>gv=gv")

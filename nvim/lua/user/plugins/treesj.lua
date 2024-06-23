@@ -1,3 +1,5 @@
+-- Split arrays and methods onto multiple lines, or join them back up.
+
 return {
   'Wansmer/treesj',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
@@ -9,3 +11,4 @@ return {
     use_default_keymaps = false,
   },
 }
+
