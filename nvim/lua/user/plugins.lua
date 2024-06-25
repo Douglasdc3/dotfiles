@@ -31,6 +31,9 @@ require("lazy").setup({
   -- Indent autodetection with editorconfig support.
   { 'tpope/vim-sleuth' },
 
+  -- Indent autodetection with editorconfig support.
+  { 'sgur/vim-editorconfig' },
+
   -- Allow plugins to enable repeating of commands.
   { 'tpope/vim-repeat' },
 
