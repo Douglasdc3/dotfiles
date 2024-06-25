@@ -11,8 +11,16 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+else
+    source /usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+else
+    source /usr/local/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # source all .zsh files inside of the zsh/ directory
 for config ($DOTFILES/zsh/**/*.zsh) source $config
