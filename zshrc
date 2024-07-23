@@ -22,6 +22,17 @@ else
     source /usr/local/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+# Enable command auto-completion
+autoload -Uz compinit
+compinit
+
+# Enable parameter suggestions
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' format '%B%d%b'
+
 # source all .zsh files inside of the zsh/ directory
 for config ($DOTFILES/zsh/**/*.zsh) source $config
 
@@ -31,9 +42,6 @@ export PATH="vendor/bin:$PATH"
 export PATH="node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 bindkey -e
 bindkey '^[[1;3C' forward-word
