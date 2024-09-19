@@ -7,7 +7,6 @@ antigen bundle agkozak/zsh-z
 antigen bundle macos
 antigen bundle jump
 antigen bundle httpie
-antigen bundle composer
 antigen bundle tmux
 antigen bundle tmuxinator
 
