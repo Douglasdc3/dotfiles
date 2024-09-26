@@ -73,7 +73,7 @@ return {
       capabilities = capabilities,
     })
 
-    require('lspconfig').tsserver.setup({
+    require('lspconfig').ts_ls.setup({
       init_options = {
         plugins = {
           {
