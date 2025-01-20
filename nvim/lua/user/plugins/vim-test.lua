@@ -13,9 +13,16 @@ return {
   },
   config = function()
     vim.cmd([[
-      let test#php#phpunit#options = '--colors=always'
-      let test#php#pest#options = '--colors=always'
-      let test#php#phpunit#executable = 'deliver vendor/bin/phpunit'
+      function! PhpUnitTransform(cmd) abort
+        return join(map(split(a:cmd), 'v:val == "--colors" ? "--colors=always" : v:val'))
+      endfunction
+
+      let g:test#custom_transformations = {'phpunit': function('PhpUnitTransform')}
+      let g:test#transformation = 'phpunit'
+      " let test#php#phpunit#options = '--colors=always'
+
+      let test#php#pest#options = '-v'
+      let test#javascript#jest#options = '--color'
 
       let g:test#strategy = 'vimux'
     ]])

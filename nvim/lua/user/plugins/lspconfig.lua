@@ -7,8 +7,8 @@ return {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'b0o/schemastore.nvim',
-    { 'jose-elias-alvarez/null-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
-    'jayp0521/mason-null-ls.nvim',
+    -- { 'nvimtools/none-ls.nvim', dependencies = 'nvim-lua/plenary.nvim' },
+    -- 'jayp0521/mason-null-ls.nvim',
   },
   config = function()
     -- Setup Mason to automatically install LSP servers
@@ -31,8 +31,8 @@ return {
         },
       },
       on_attach = function(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
+        -- client.server_capabilities.documentFormattingProvider = false
+        -- client.server_capabilities.documentRangeFormattingProvider = false
       end,
       capabilities = capabilities
     })
@@ -124,50 +124,50 @@ return {
     })
 
     -- null-ls
-    local null_ls = require('null-ls')
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    -- local null_ls = require('null-ls')
+    -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-    null_ls.setup({
-      temp_dir = '/tmp',
-      sources = {
-        null_ls.builtins.diagnostics.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ '.eslintrc.js' })
-          end,
-        }),
-        -- null_ls.builtins.diagnostics.phpstan, -- TODO: Only if config file
-        null_ls.builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
-        null_ls.builtins.formatting.eslint_d.with({
-          condition = function(utils)
-            return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
-          end,
-        }),
-        null_ls.builtins.formatting.pint.with({
-          condition = function(utils)
-            return utils.root_has_file({ 'vendor/bin/pint' })
-          end,
-        }),
-        null_ls.builtins.formatting.prettier.with({
-          condition = function(utils)
-            return utils.root_has_file({ '.prettierrc', '.prettierrc.json', '.prettierrc.yml', '.prettierrc.js', 'prettier.config.js' })
-          end,
-        }),
-      },
-      on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 5000 })
-            end,
-          })
-        end
-      end,
-    })
+    -- null_ls.setup({
+    --   temp_dir = '/tmp',
+    --   sources = {
+    --     null_ls.builtins.diagnostics.eslint_d.with({
+    --       condition = function(utils)
+    --         return utils.root_has_file({ '.eslintrc.js' })
+    --       end,
+    --     }),
+    --     -- null_ls.builtins.diagnostics.phpstan, -- TODO: Only if config file
+    --     null_ls.builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
+    --     null_ls.builtins.formatting.eslint_d.with({
+    --       condition = function(utils)
+    --         return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
+    --       end,
+    --     }),
+    --     null_ls.builtins.formatting.pint.with({
+    --       condition = function(utils)
+    --         return utils.root_has_file({ 'vendor/bin/pint' })
+    --       end,
+    --     }),
+    --     null_ls.builtins.formatting.prettier.with({
+    --       condition = function(utils)
+    --         return utils.root_has_file({ '.prettierrc', '.prettierrc.json', '.prettierrc.yml', '.prettierrc.js', 'prettier.config.js' })
+    --       end,
+    --     }),
+    --   },
+    --   on_attach = function(client, bufnr)
+    --     if client.supports_method("textDocument/formatting") then
+    --       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    --       vim.api.nvim_create_autocmd("BufWritePre", {
+    --         group = augroup,
+    --         buffer = bufnr,
+    --         callback = function()
+    --           vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 5000 })
+    --         end,
+    --       })
+    --     end
+    --   end,
+    -- })
 
-    require('mason-null-ls').setup({ automatic_installation = true })
+    -- require('mason-null-ls').setup({ automatic_installation = true })
 
     -- Keymaps
     vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
@@ -180,7 +180,13 @@ return {
     vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
     -- Commands
-    vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({ timeout_ms = 5000 }) end, {})
+    -- vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({ timeout_ms = 5000 }) end, {})
+    -- vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({
+    --   filter = function(client)
+    --     return client.name == "null-ls"
+    --   end,
+    --   timeout_ms = 5000
+    -- }) end, {})
 
     -- Diagnostic configuration
     --vim.diagnostic.config({
