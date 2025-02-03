@@ -39,6 +39,7 @@ echo "Install brew tools"
 brew install zsh-autosuggestions zsh-syntax-highlighting
 brew install fzf
 brew install nvim
+brew install kitty
 brew install tmux tmuxinator urlview
 brew install httpie
 brew install gh
