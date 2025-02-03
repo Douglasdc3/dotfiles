@@ -13,12 +13,12 @@ source $ZSH/oh-my-zsh.sh
 
 if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
+elif [ -f /usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then 
     source /usr/local/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-else
+elif [ -f /usr/local/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ];then
     source /usr/local/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
@@ -40,10 +40,25 @@ for config ($DOTFILES/zsh/**/*.zsh) source $config
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="vendor/bin:$PATH"
 export PATH="node_modules/.bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 bindkey -e
 bindkey '^[[1;3C' forward-word
 bindkey '^[[1;3D' backward-word
+
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/kenandries/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/kenandries/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP binary.
+export PATH="/Users/kenandries/Library/Application Support/Herd/bin/":$PATH
 

@@ -2,14 +2,24 @@
 
 ## Manual Steps
 
-### 1. Install zsh
+### 1. Clone repo
 
-https://ohmyz.sh/#install
+```
+git clone git@github.com:Douglasdc3/dotfiles.git .dotfiles
+cd .dotfiles
+```
 
-### 2. Install brew
+### 2. Run install script
 
-https://brew.sh install brew
+```
+# Switch to ZSH shell
+zsh
+zsh install.sh
+```
 
-### 3. Mac defaults 
+## 3. Miscellaneous 
 
-pick from https://github.com/freekmurze/dotfiles/blob/main/macos/set-defaults.sh
+* Install alfred workflows
+* Setup CAPPS-LOCK -> CTRL mapping
+* Setup Internet accounts
+

@@ -1,19 +1,35 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -e
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    # Install oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+   sh "$ZSH/tools/upgrade.sh"
+fi
+
+# Ensure .config directory exists
+mkdir -p $HOME/.config
 
 echo "Symlink .dotfiles dot files into $HOME"
 ln -F -s $PWD/zshrc $HOME/.zshrc
 ln -F -s $PWD/ctags $HOME/.ctags
 ln -F -s $PWD/gitignore_global $HOME/.gitignore_global
-ln -s $PWD/phpactor $HOME/.config/phpactor
+ln -F -s $PWD/phpactor $HOME/.config/phpactor
 ln -F -s $PWD/kitty $HOME/.config/kitty
 ln -F -s $PWD/tmux.conf $HOME/.tmux.conf
 ln -F -s $PWD/tmux_darwin.conf $HOME/.tmux_darwin.conf
 ln -F -s $PWD/tmux/ $HOME/.tmux
 ln -F -s $PWD/nvim/ $HOME/.config/nvim
 
+echo "Creating local scripts directory"
 mkdir -p $HOME/.local/bin
 ln -F -s $PWD/scripts/t $HOME/.local/bin/t
 ln -F -s $PWD/scripts/deliver $HOME/.local/bin/deliver
+
+echo "Install Homebrew"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "Hush login screen when opening new terminal"
 touch $HOME/.hushlogin
@@ -23,86 +39,103 @@ echo "Install brew tools"
 brew install zsh-autosuggestions zsh-syntax-highlighting
 brew install fzf
 brew install nvim
-brew install lua-language-server luacheck
 brew install tmux tmuxinator urlview
-brew install sqlite
-brew install php
-brew install node
-brew install mysql
 brew install httpie
 brew install gh
-brew install mailhog
 
 # Other utilities
-brew install youtube-dl
+brew install yt-dlp
 brew install tree
 brew install pv
 brew install prettyping
 brew install nmap
 brew install bat
-brew install ripgrep
+brew install ncdu
 brew install gource
 
 echo "Install applications (Casks)"
 # Arduino
-brew install --cask arduino fritzing 
+brew install --cask arduino-ide
 # Rpi / img writer
 brew install --cask balenaetcher
 
 # Dev tools
-brew install --cask iterm2 
-brew install --cask wireshark
 brew install --cask imageoptim
-brew install --cask phpmon jetbrains-toolbox
+brew install --cask jetbrains-toolbox
+brew install --cask herd
 
 # Virtual envs
-brew install --cask docker vagrant virtualbox
-
-# Editors 
-brew install --cask processing scenebuilder stoplight-studio visual-studio-code visualvm
-
-# DB Tools
-brew install --cask robo-3t sequel-pro
+brew install --cask docker virtualbox
 
 # Utils
-brew install --cask caffeine flux color-oracle gifox spectacle
+brew install --cask caffeine color-oracle
 brew install --cask alfred
 brew install --cask drawio
-brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
-brew install --cask homebrew/cask-fonts/font-dejavu-sans-mono-nerd-font
-brew install --cask homebrew/cask-fonts/font-fira-code-nerd-font
-brew install --cask homebrew/cask-fonts/font-jetbrains-mono-nerd-font
+brew install --cask font-dejavu-sans-mono-for-powerline
+brew install --cask font-dejavu-sans-mono-nerd-font
+brew install --cask font-fira-code-nerd-font
+brew install --cask font-jetbrains-mono-nerd-font
 
 # Browsers 
-brew install --cask firefox google-chrome opera
+brew install --cask firefox google-chrome
 
 # Social / Other
-brew install --cask discord twitch
-brew install --cask vlc spotify
+brew install --cask discord slack
+brew install --cask vlc
 
 
-echo "Install composer"
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php --install-dir=bin --filename=composer
-php -r "unlink('composer-setup.php');"
+# Install php dependencies
+#echo "Install global composer packages"
+#composer global require "tightenco/takeout:*"
 
-echo "Install global comoposer packages"
-composer global require "laravel/valet:*"
-composer global require "laravel/installer:*"
-composer global require "botman/installer:*"
-composer global require "phan/phan:*"
-composer global require "vimeo/psalm:*"
-composer global require "tightenco/takeout:*"
-composer global require "squizlabs/php_codesniffer:*"
-composer global require "phpmd/phpmd:*"
-composer global require "friendsofphp/php-cs-fixer:*"
-composer global require "infection/infection:*"
-composer global require "beyondcode/expose"
+echo "Set mac defaults"
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
-echo "Do not forget to activate expose first"
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-echo "Setup valet (may require password)"
-valet trust
-valet install
-valet proxy mailhog.test http://127.0.0.1:8025
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+
+
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Show the ~/Users folder
+chflags nohidden /Users
+# Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+# Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
