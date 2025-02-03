@@ -5,8 +5,6 @@ set -e
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     # Install oh-my-zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-   sh "$ZSH/tools/upgrade.sh"
 fi
 
 # Ensure .config directory exists
@@ -46,6 +44,7 @@ brew install gh
 
 # Other utilities
 brew install yt-dlp
+brew install cmake
 brew install tree
 brew install pv
 brew install prettyping
