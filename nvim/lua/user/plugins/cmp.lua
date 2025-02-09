@@ -8,8 +8,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
-    -- 'hrsh7th/copilot',
-    'hrsh7th/cmp-copilot',
+    'zbirenbaum/copilot-cmp',
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind-nvim',
@@ -19,6 +18,15 @@ return {
     local cmp = require('cmp')
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
+    lspkind.init({
+      symbol_map = {
+        Copilot = "",
+      },
+    })
+
+    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg ="#6CC644"})
+
+    require("copilot_cmp").setup()
 
     require('luasnip/loaders/from_snipmate').lazy_load()
     require('luasnip.loaders.from_vscode').lazy_load()
@@ -61,6 +69,7 @@ return {
         fields = { "kind", "abbr", "menu" },
         format = lspkind.cmp_format({
           mode = 'symbol',
+          symbol_map = { Copilot = "" },
           -- See: https://www.reddit.com/r/neovim/comments/103zetf/how_can_i_get_a_vscodelike_tailwind_css/
           before = function(entry, vim_item)
             -- Replace the 'menu' field with the kind and source
@@ -115,7 +124,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
-        -- { name = 'copilot' },
+        { name = 'copilot' },
         { name = 'buffer' },
         { name = 'path' },
       },
