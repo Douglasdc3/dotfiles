@@ -21,8 +21,24 @@ return {
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+    local get_intelephense_license = function ()
+      local f = assert(io.open(os.getenv("HOME") .. "/.config/intelephense/license.txt", "rb"))
+      local content = f:read("*a")
+      f:close()
+      return string.gsub(content, "%s+", "")
+    end
     -- PHP
     require('lspconfig').intelephense.setup({
+      init_options = {
+        licenceKey = get_intelephense_license(),
+      },
+      settings = {
+        intelepehense = {
+          files = {
+            maxSize = 5000000,
+          },
+        }
+      },
       commands = {
         IntelephenseIndex = {
           function()
@@ -37,6 +53,9 @@ return {
       capabilities = capabilities
     })
 
+    require('lspconfig').psalm.setup({
+      capabilities = capabilities,
+    })
     require('lspconfig').phpactor.setup({
       capabilities = capabilities,
       on_attach = function(client, bufnr)
@@ -56,8 +75,8 @@ return {
         client.server_capabilities.documentRangeFormattingProvider = false
       end,
       init_options = {
-        ["language_server_phpstan.enabled"] = false,
-        ["language_server_psalm.enabled"] = false,
+        ["language_server_phpstan.enabled"] = true,
+        ["language_server_psalm.enabled"] = true,
       },
       handlers = {
         ['textDocument/publishDiagnostics'] = function() end
@@ -189,12 +208,13 @@ return {
     -- }) end, {})
 
     -- Diagnostic configuration
-    --vim.diagnostic.config({
-      --virtual_text = false,
+    vim.diagnostic.config({
+      update_in_insert = true,
+      virtual_text = true,
       --float = {
         --source = true,
       --}
-    --})
+    })
 
     -- Sign configuration
     vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
