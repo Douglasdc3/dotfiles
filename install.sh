@@ -52,7 +52,7 @@ brew install nmap
 brew install bat
 brew install ncdu
 brew install gource
-
+brew install livegrep fd # Required to run nvim
 echo "Install applications (Casks)"
 # Arduino
 brew install --cask arduino-ide
