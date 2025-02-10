@@ -142,6 +142,7 @@ return {
       }
     })
 
+    require('lspconfig').gh_actions_ls.setup({})
     -- null-ls
     -- local null_ls = require('null-ls')
     -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
