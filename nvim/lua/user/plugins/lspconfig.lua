@@ -28,12 +28,12 @@ return {
       return string.gsub(content, "%s+", "")
     end
     -- PHP
-    require('lspconfig').intelephense.setup({
+    vim.lsp.config('intelephense', {
       init_options = {
         licenceKey = get_intelephense_license(),
       },
       settings = {
-        intelepehense = {
+        intelephense = {
           files = {
             maxSize = 5000000,
           },
@@ -52,11 +52,14 @@ return {
       end,
       capabilities = capabilities
     })
+    vim.lsp.enable('intelephense')
 
-    require('lspconfig').psalm.setup({
+    vim.lsp.config('psalm', {
       capabilities = capabilities,
     })
-    require('lspconfig').phpactor.setup({
+    vim.lsp.enable('psalm')
+
+    vim.lsp.config('phpactor', {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         client.server_capabilities.completionProvider = false
@@ -82,17 +85,19 @@ return {
         ['textDocument/publishDiagnostics'] = function() end
       }
     })
+    vim.lsp.enable('phpactor')
 
     -- Vue, JavaScript, TypeScript
-    require('lspconfig').volar.setup({
+    vim.lsp.config('volar', {
       on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
       end,
       capabilities = capabilities,
     })
+    vim.lsp.enable('volar')
 
-    require('lspconfig').ts_ls.setup({
+    vim.lsp.config('ts_ls', {
       init_options = {
         plugins = {
           {
@@ -112,12 +117,14 @@ return {
         "vue",
       },
     })
+    vim.lsp.enable('ts_ls')
 
     -- Tailwind CSS
-    require('lspconfig').tailwindcss.setup({ capabilities = capabilities })
+    vim.lsp.config('tailwindcss', { capabilities = capabilities })
+    vim.lsp.enable('tailwindcss')
 
     -- JSON
-    require('lspconfig').jsonls.setup({
+    vim.lsp.config('jsonls', {
       capabilities = capabilities,
       settings = {
         json = {
@@ -125,9 +132,10 @@ return {
         },
       },
     })
+    vim.lsp.enable('jsonls')
 
     -- Lua
-    require('lspconfig').lua_ls.setup({
+    vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
           runtime = { version = 'LuaJIT' },
@@ -141,55 +149,13 @@ return {
         }
       }
     })
+    vim.lsp.enable('lua_ls')
 
-    require('lspconfig').gh_actions_ls.setup({})
-    -- null-ls
-    -- local null_ls = require('null-ls')
-    -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    vim.lsp.config('gh_actions_ls', ({}))
+    vim.lsp.enable('gh_actions_ls')
 
-    -- null_ls.setup({
-    --   temp_dir = '/tmp',
-    --   sources = {
-    --     null_ls.builtins.diagnostics.eslint_d.with({
-    --       condition = function(utils)
-    --         return utils.root_has_file({ '.eslintrc.js' })
-    --       end,
-    --     }),
-    --     -- null_ls.builtins.diagnostics.phpstan, -- TODO: Only if config file
-    --     null_ls.builtins.diagnostics.trail_space.with({ disabled_filetypes = { 'NvimTree' } }),
-    --     null_ls.builtins.formatting.eslint_d.with({
-    --       condition = function(utils)
-    --         return utils.root_has_file({ '.eslintrc.js', '.eslintrc.json' })
-    --       end,
-    --     }),
-    --     null_ls.builtins.formatting.pint.with({
-    --       condition = function(utils)
-    --         return utils.root_has_file({ 'vendor/bin/pint' })
-    --       end,
-    --     }),
-    --     null_ls.builtins.formatting.prettier.with({
-    --       condition = function(utils)
-    --         return utils.root_has_file({ '.prettierrc', '.prettierrc.json', '.prettierrc.yml', '.prettierrc.js', 'prettier.config.js' })
-    --       end,
-    --     }),
-    --   },
-    --   on_attach = function(client, bufnr)
-    --     if client.supports_method("textDocument/formatting") then
-    --       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    --       vim.api.nvim_create_autocmd("BufWritePre", {
-    --         group = augroup,
-    --         buffer = bufnr,
-    --         callback = function()
-    --           vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 5000 })
-    --         end,
-    --       })
-    --     end
-    --   end,
-    -- })
 
-    -- require('mason-null-ls').setup({ automatic_installation = true })
-
-    -- Keymaps
+      -- Keymaps
     vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
     vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
     vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
@@ -198,15 +164,6 @@ return {
     vim.keymap.set('n', '<Leader>lr', ':LspRestart<CR>', { silent = true })
     vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
     vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-
-    -- Commands
-    -- vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({ timeout_ms = 5000 }) end, {})
-    -- vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format({
-    --   filter = function(client)
-    --     return client.name == "null-ls"
-    --   end,
-    --   timeout_ms = 5000
-    -- }) end, {})
 
     -- Diagnostic configuration
     vim.diagnostic.config({
